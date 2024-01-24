@@ -1,0 +1,23 @@
+import DataBase from "../apis/db/database";
+import Context from "../types/context";
+interface RunFunctionOptions {
+  target: any;
+  client: any;
+  commandName: string;
+  command: any;
+  args: any[];
+  context: Context;
+  db: DataBase;
+}
+
+module.exports = {
+  aliases: [],
+  run: (options: RunFunctionOptions) => {
+    const { target, client, commandName, command, args, context, db } = options;
+    try {
+      client.say("");
+    } catch (error) {
+      console.log(`🐧 -> error:`, error);
+    }
+  },
+};
