@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi } from "openai";
+import { ChatCompletionRequestMessage, Configuration, OpenAIApi } from "openai";
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 })
@@ -8,8 +8,8 @@ export default class OpenAIAPIWrapper {
         this.openai = new OpenAIApi(configuration);
     }
 
-    async getAssistantResponse(msg: any) {
-        let mensajes = [{
+    async getAssistantResponse(msg: string) {
+        const mensajes = [{
                 role: "system",
                 "content": "ten en cuenta que la fecha y hora de hoy es:  " + new Date().toLocaleString("es-ES", {
                     timeZone: "America/Argentina/Buenos_Aires"
@@ -43,7 +43,7 @@ export default class OpenAIAPIWrapper {
         const completion = await this.openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             max_tokens: 400,
-            messages: mensajes as any,
+            messages: mensajes as ChatCompletionRequestMessage[],
         });
 
         const response = completion.data.choices?.[0]?.message?.content;
@@ -51,7 +51,7 @@ export default class OpenAIAPIWrapper {
     }
 
     async assistantChatWithUsers(msgHistory) {
-        let mensajes = [{
+        const mensajes = [{
                 role: "system",
                 "content": "ten en cuenta que la fecha y hora de hoy es:  " + new Date().toLocaleString("es-ES", {
                     timeZone: "America/Argentina/Buenos_Aires"
@@ -85,7 +85,7 @@ export default class OpenAIAPIWrapper {
         const completion = await this.openai.createChatCompletion({
             model: "gpt-3.5-turbo",
             max_tokens: 400,
-            messages: mensajes as any,
+            messages: mensajes as ChatCompletionRequestMessage[],
         });
 
         const response = completion.data.choices?.[0]?.message?.content;

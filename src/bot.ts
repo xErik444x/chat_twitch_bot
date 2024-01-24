@@ -4,9 +4,7 @@ import tmi, { ChatUserstate } from 'tmi.js';
 import DataBase from './apis/db/database';
 import onMessageHandler from './handlers/onMessageHandler';
 import onConnectedHandler from './handlers/onConnectedHandler';
-import Context from './types/context';
-//https://d-fischer.github.io/twitch-chat-client/reference/classes/ChatClient.html
-//https://twitchapps.com/tmi/
+
 const opts = {
     options: {
         debug: true,
@@ -16,7 +14,7 @@ const opts = {
         password: process.env.password,
     },
     channels: [
-        process.env.twitchChannel ?? "xerik_444"//'ripplebot444'
+        "xerik_444", "ripplebot444"
     ]
 };
 const db = new DataBase();

@@ -1,16 +1,16 @@
 'use strict';
-import tmi, { ChatUserstate } from 'tmi.js';
+import { ChatUserstate, Client } from 'tmi.js';
 import DataBase from '../apis/db/database';
 
 interface RunFunctionOptions {
-    target: any;
-    client: any;
+    target: string;
+    client: Client;
     commandName: string;
-    command: any;
-    args: any[];
+    command: string;
+    args: string[];
     context: ChatUserstate;
     db: DataBase;
-}
+  }
 
 module.exports = {
     aliases: ["dado", "dice"],
@@ -18,11 +18,7 @@ module.exports = {
         const {
             target,
             client,
-            commandName,
             command,
-            args,
-            context,
-            db
         } = options;
     const sides = 12;
     const res = Math.floor(Math.random() * sides) + 1;

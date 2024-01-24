@@ -1,12 +1,10 @@
 import DataBase from "../apis/db/database";
-import Context from "../types/context";
-import { ChatUserstate } from 'tmi.js';
-interface RunFunctionOptions {
-  target: any;
-  client: any;
+import { ChatUserstate, Client } from 'tmi.js';interface RunFunctionOptions {
+  target: string;
+  client: Client;
   commandName: string;
-  command: any;
-  args: any[];
+  command: string;
+  args: string[];
   context: ChatUserstate;
   db: DataBase;
 }
@@ -14,7 +12,7 @@ interface RunFunctionOptions {
 module.exports = {
   aliases: ["info", "user_info"],
   run: (options: RunFunctionOptions) => {
-    const { target, client, commandName, command, args, context, db } = options;
+    const { target, client, context, db } = options;
     if(!context.username) return;
     const userInfo = db.getUserInfo(context.username);
     try {

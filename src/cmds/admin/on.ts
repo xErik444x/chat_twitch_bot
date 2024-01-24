@@ -1,13 +1,12 @@
-import { ChatUserstate } from "tmi.js";
+import { ChatUserstate, Client } from "tmi.js";
 import DataBase from "../../apis/db/database";
-import Context from "../../types/context";
 
 interface RunFunctionOptions {
-  target: any;
-  client: any;
+  target: string;
+  client: Client;
   commandName: string;
-  command: any;
-  args: any[];
+  command: string;
+  args: string[];
   context: ChatUserstate;
   db: DataBase;
 }
@@ -16,7 +15,7 @@ module.exports = {
   aliases: [],
   admin:true,
   run: (options: RunFunctionOptions) => {
-    const { target, client, commandName, command, args, context, db } = options;
+    const { target, client, db } = options;
     try {
       db.setRippleStatus(true);
       client.say(target, "Ripple está activa y esperando ordenes!");
